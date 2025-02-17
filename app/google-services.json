@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "948825849720",
+    "project_id": "alexa-mart",
+    "storage_bucket": "alexa-mart.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:948825849720:android:59c62b5011c2026577128d",
+        "android_client_info": {
+          "package_name": "com.epsports.alexamart"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_EN7QToRjX-ibr9AJD-ooGtBR7U3PVfI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
