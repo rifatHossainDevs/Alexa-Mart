@@ -15,6 +15,6 @@
     <string name="customer">Customer</string>
     <string name="seller">Seller</string>
     <string name="admin">Admin</string>
-    <string name="errormessge">errorMessge</string>
+    <string name="errorMessage">errorMessage</string>
     <string name="already_have_an_account">Already have an account</string>
 </resources>

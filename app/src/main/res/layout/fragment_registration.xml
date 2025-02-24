@@ -26,7 +26,7 @@
         android:textSize="@dimen/_28sdp" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/nameContainer"
+        android:id="@+id/etNameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_32sdp"
@@ -132,7 +132,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_32sdp"
-        android:text="@string/errormessge"
+        android:text="@string/errorMessage"
         android:textColor="#FF0202"
         android:visibility="gone" />
 
