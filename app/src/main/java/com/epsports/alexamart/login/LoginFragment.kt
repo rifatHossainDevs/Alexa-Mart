@@ -43,7 +43,7 @@ class LoginFragment : Fragment() {
             return false
         }
         if (!email.matches(emailPattern.toRegex())) {
-            binding.emailInputLayout.error = "Email does not matches"
+            binding.emailInputLayout.error = "Email format does not match"
             return false
         }
         if (password == "") {

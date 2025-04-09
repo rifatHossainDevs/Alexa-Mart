@@ -6,37 +6,41 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.view.isEmpty
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.epsports.alexamart.R
+import androidx.fragment.app.viewModels
+import com.epsports.alexamart.base.BaseFragment
+import com.epsports.alexamart.core.DataState
+import com.epsports.alexamart.data.models.UserRegistration
 import com.epsports.alexamart.databinding.FragmentRegistrationBinding
 import com.google.android.material.button.MaterialButtonToggleGroup
-import org.intellij.lang.annotations.Pattern
 
 
-class RegistrationFragment : Fragment() {
-    private lateinit var binding: FragmentRegistrationBinding
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
-        binding = FragmentRegistrationBinding.inflate(inflater, container, false)
-        setAllClickListener()
+class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(FragmentRegistrationBinding::inflate) {
 
+    private val viewModel: RegistrationViewModel by viewModels()
 
-        return binding.root
-    }
-
-    private fun setAllClickListener() {
+    override fun setAllClickListener() {
         binding.btnRegister.setOnClickListener {
             checkAllValidityCheck()
             if (checkAllValidityCheck()) {
-                Toast.makeText(context, "All Input Done!", Toast.LENGTH_SHORT).show()
-                findNavController().navigate(R.id.action_registrationFragment_to_loginFragment)
+                val user = UserRegistration(
+                    binding.etName.text.toString(),
+                    binding.etEmail.text.toString(),
+                    binding.etPassword.text.toString(),
+                    "seller",
+                    ""
+                )
+                viewModel.userRegistration(user)
+
+                //findNavController().navigate(R.id.action_registrationFragment_to_loginFragment)
             }
         }
     }
+
+    override fun allObserver() {
+        registrationObserver()
+    }
+
 
     @SuppressLint("SetTextI18n")
     private fun checkAllValidityCheck(): Boolean {
@@ -55,7 +59,7 @@ class RegistrationFragment : Fragment() {
             return false
         }
         if (!email.matches(emailPattern.toRegex())) {
-            binding.emailInputLayout.error = "Email does not matches"
+            binding.emailInputLayout.error = "Email format does not match"
             return false
         }
         if (password == "") {
@@ -66,8 +70,7 @@ class RegistrationFragment : Fragment() {
             binding.passwordInputLayout.error = "Password must have at least 8 character"
             return false
         }
-
-        if (toggleButton.isEmpty()) {
+        if (toggleButton.checkedButtonIds.isEmpty()) {
             binding.apply {
                 errorMessage.visibility = View.VISIBLE
                 errorMessage.text = "Please Select an Option"
@@ -76,4 +79,24 @@ class RegistrationFragment : Fragment() {
         }
         return true
     }
+
+    private fun registrationObserver() {
+        viewModel.registrationResponse.observe(viewLifecycleOwner) {
+            when(it){
+                is DataState.Error -> {
+                    loading.dismiss()
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
+                is DataState.Loading -> {
+                    loading.show()
+                    Toast.makeText(context, "Loading...", Toast.LENGTH_SHORT).show()
+                }
+                is DataState.Success -> {
+                    loading.dismiss()
+                    Toast.makeText(context, "user created successfully${it.data}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
 }
