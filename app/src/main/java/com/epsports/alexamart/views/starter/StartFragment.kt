@@ -1,4 +1,4 @@
-package com.epsports.alexamart.starter
+package com.epsports.alexamart.views.starter
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,22 +7,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.epsports.alexamart.R
+import com.epsports.alexamart.base.BaseFragment
 import com.epsports.alexamart.databinding.FragmentStartBinding
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.HiltAndroidApp
 
-class StartFragment : Fragment() {
-    private lateinit var binding: FragmentStartBinding
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
-        binding = FragmentStartBinding.inflate(inflater, container, false)
+@AndroidEntryPoint
+class StartFragment : BaseFragment<FragmentStartBinding>(FragmentStartBinding::inflate) {
 
-        allClickListener()
-
-        return binding.root
-    }
-
-    private fun allClickListener() {
+    override fun setAllClickListener() {
         with(binding){
             btnLogin.setOnClickListener {
                 findNavController().navigate(R.id.action_startFragment_to_loginFragment)
@@ -32,6 +25,10 @@ class StartFragment : Fragment() {
                 findNavController().navigate(R.id.action_startFragment_to_registrationFragment)
             }
         }
+    }
+
+    override fun allObserver() {
+
     }
 
 }

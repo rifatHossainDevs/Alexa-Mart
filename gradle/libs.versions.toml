@@ -1,7 +1,7 @@
 [versions]
 agp = "8.9.1"
-kotlin = "2.1.10"
-coreKtx = "1.15.0"
+kotlin = "2.0.10"
+coreKtx = "1.16.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
@@ -25,6 +25,7 @@ navigationUiKtx = "2.8.9"
 sdpAndroid = "1.1.1"
 sspAndroid = "1.1.1"
 lottie = "6.5.2"
+hilt_version = "2.48"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -49,10 +50,14 @@ androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation
 sdp-android = { module = "com.intuit.sdp:sdp-android", version.ref = "sdpAndroid" }
 ssp-android = { module = "com.intuit.ssp:ssp-android", version.ref = "sspAndroid" }
 lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
+dagger-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt_version" }
+dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt_version" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
 google-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "googleFirebaseCrashlytics" }
+hiltAndroid = { id = "com.google.dagger.hilt.android", version.ref = "hilt_version" }
+
 

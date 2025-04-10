@@ -1,40 +1,46 @@
-package com.epsports.alexamart.registration
+package com.epsports.alexamart.views.registration
 
 import android.annotation.SuppressLint
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.epsports.alexamart.R
 import com.epsports.alexamart.base.BaseFragment
 import com.epsports.alexamart.core.DataState
 import com.epsports.alexamart.data.models.UserRegistration
 import com.epsports.alexamart.databinding.FragmentRegistrationBinding
 import com.google.android.material.button.MaterialButtonToggleGroup
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(FragmentRegistrationBinding::inflate) {
 
     private val viewModel: RegistrationViewModel by viewModels()
 
     override fun setAllClickListener() {
-        binding.btnRegister.setOnClickListener {
-            checkAllValidityCheck()
-            if (checkAllValidityCheck()) {
-                val user = UserRegistration(
-                    binding.etName.text.toString(),
-                    binding.etEmail.text.toString(),
-                    binding.etPassword.text.toString(),
-                    "seller",
-                    ""
-                )
-                viewModel.userRegistration(user)
+        with(binding){
+            btnRegister.setOnClickListener {
+                checkAllValidityCheck()
+                if (checkAllValidityCheck()) {
+                    val user = UserRegistration(
+                        etName.text.toString(),
+                        etEmail.text.toString(),
+                        etPassword.text.toString(),
+                        "seller",
+                        ""
+                    )
+                    viewModel.userRegistration(user)
 
-                //findNavController().navigate(R.id.action_registrationFragment_to_loginFragment)
+                    //findNavController().navigate(R.id.action_registrationFragment_to_loginFragment)
+                }
+            }
+
+            btnLogin.setOnClickListener {
+                findNavController().navigate(R.id.action_registrationFragment_to_loginFragment)
             }
         }
+
     }
 
     override fun allObserver() {

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".registration.RegistrationFragment">
+    tools:context=".views.registration.RegistrationFragment">
 
     <ImageView
         android:id="@+id/ivLogo"

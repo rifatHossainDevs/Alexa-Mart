@@ -3,6 +3,9 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.gms.google.services)
     alias(libs.plugins.google.firebase.crashlytics)
+    kotlin("kapt")
+    alias(libs.plugins.hiltAndroid)
+
 }
 
 android {
@@ -65,4 +68,8 @@ dependencies {
     implementation(libs.sdp.android)
     implementation(libs.ssp.android)
     implementation(libs.lottie)
+    implementation(libs.dagger.hilt.android)
+    kapt(libs.dagger.hilt.compiler)
+
+
 }
