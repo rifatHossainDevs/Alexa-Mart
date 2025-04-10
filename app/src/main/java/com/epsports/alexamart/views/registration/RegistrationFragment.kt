@@ -47,6 +47,24 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(FragmentR
         registrationObserver()
     }
 
+    private fun registrationObserver() {
+        viewModel.registrationResponse.observe(viewLifecycleOwner) {
+            when(it){
+                is DataState.Error -> {
+                    loading.dismiss()
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
+                is DataState.Loading -> {
+                    loading.show()
+                    Toast.makeText(context, "Loading...", Toast.LENGTH_SHORT).show()
+                }
+                is DataState.Success -> {
+                    loading.dismiss()
+                    Toast.makeText(context, "user created successfully${it.data}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
 
     @SuppressLint("SetTextI18n")
     private fun checkAllValidityCheck(): Boolean {
@@ -84,25 +102,6 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(FragmentR
             return false
         }
         return true
-    }
-
-    private fun registrationObserver() {
-        viewModel.registrationResponse.observe(viewLifecycleOwner) {
-            when(it){
-                is DataState.Error -> {
-                    loading.dismiss()
-                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                }
-                is DataState.Loading -> {
-                    loading.show()
-                    Toast.makeText(context, "Loading...", Toast.LENGTH_SHORT).show()
-                }
-                is DataState.Success -> {
-                    loading.dismiss()
-                    Toast.makeText(context, "user created successfully${it.data}", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
     }
 
 }
