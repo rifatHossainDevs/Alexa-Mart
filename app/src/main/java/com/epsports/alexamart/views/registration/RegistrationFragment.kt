@@ -61,6 +61,7 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(FragmentR
                 is DataState.Success -> {
                     loading.dismiss()
                     Toast.makeText(context, "user created successfully${it.data}", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.action_registrationFragment_to_dashboardFragment)
                 }
             }
         }

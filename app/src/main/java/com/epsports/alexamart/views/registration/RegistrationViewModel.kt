@@ -10,7 +10,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class RegistrationViewModel @Inject constructor(private val authService: AuthRepository): ViewModel() {
+class RegistrationViewModel @Inject constructor(private val authService: AuthRepository) :
+    ViewModel() {
 
     private val _registrationResponse = MutableLiveData<DataState<UserRegistration>>()
 
@@ -20,7 +21,14 @@ class RegistrationViewModel @Inject constructor(private val authService: AuthRep
         _registrationResponse.postValue(DataState.Loading())
 
         authService.userRegistration(user).addOnSuccessListener {
-            _registrationResponse.postValue(DataState.Success(user))
+            it.user?.let {createdUser->
+                user.userId = createdUser.uid
+                authService.createUser(user).addOnSuccessListener {
+                    _registrationResponse.postValue(DataState.Success(user))
+                }.addOnFailureListener {
+                    _registrationResponse.postValue(DataState.Error("${it.message}"))
+                }
+            }
         }.addOnFailureListener {
             _registrationResponse.postValue(DataState.Error("${it.message}"))
         }

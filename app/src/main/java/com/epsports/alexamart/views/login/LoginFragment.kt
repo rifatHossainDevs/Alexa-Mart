@@ -2,6 +2,8 @@ package com.epsports.alexamart.views.login
 
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.epsports.alexamart.R
 import com.epsports.alexamart.base.BaseFragment
 import com.epsports.alexamart.core.DataState
 import com.epsports.alexamart.data.models.UserLogin
@@ -13,18 +15,23 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
     val viewModel: LoginViewModel by viewModels()
     override fun setAllClickListener() {
-        binding.btnLogin.setOnClickListener {
-            allFieldValidityCheck()
-            if (allFieldValidityCheck()) {
-                //Toast.makeText(context, "All Input done!", Toast.LENGTH_SHORT).show()
-                val user = UserLogin(
-                    binding.etEmail.text.toString(),
-                    binding.etPassword.text.toString()
-                )
-                viewModel.userLogin(user)
-                //findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment)
+        with (binding){
+            btnLogin.setOnClickListener {
+                allFieldValidityCheck()
+                if (allFieldValidityCheck()) {
+                    val user = UserLogin(
+                        etEmail.text.toString(),
+                        etPassword.text.toString()
+                    )
+                    viewModel.userLogin(user)
+                }
+            }
+
+            btnRegister.setOnClickListener {
+                findNavController().navigate(R.id.action_loginFragment_to_registrationFragment)
             }
         }
+
     }
 
     override fun allObserver() {
@@ -45,6 +52,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 is DataState.Success -> {
                     loading.dismiss()
                     Toast.makeText(context, "Login in Successful for ${it.data}", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment)
                 }
             }
         }
