@@ -17,4 +17,7 @@
     <string name="admin">Admin</string>
     <string name="errorMessage">errorMessage</string>
     <string name="already_have_an_account">Already have an account</string>
+    <string name="product">Product</string>
+    <string name="add">Add</string>
+    <string name="profile">Profile</string>
 </resources>

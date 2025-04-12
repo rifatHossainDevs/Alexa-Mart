@@ -1,6 +1,7 @@
 package com.epsports.alexamart.views.registration
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -8,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.epsports.alexamart.R
 import com.epsports.alexamart.base.BaseFragment
 import com.epsports.alexamart.core.DataState
+import com.epsports.alexamart.dashboard.seller.SellerDashboard
 import com.epsports.alexamart.data.models.UserRegistration
 import com.epsports.alexamart.databinding.FragmentRegistrationBinding
 import com.google.android.material.button.MaterialButtonToggleGroup
@@ -32,7 +34,6 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(FragmentR
                     )
                     viewModel.userRegistration(user)
 
-                    //findNavController().navigate(R.id.action_registrationFragment_to_loginFragment)
                 }
             }
 
@@ -61,7 +62,8 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(FragmentR
                 is DataState.Success -> {
                     loading.dismiss()
                     Toast.makeText(context, "user created successfully${it.data}", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_registrationFragment_to_dashboardFragment)
+                    startActivity(Intent(requireContext(), SellerDashboard::class.java))
+                    requireActivity().finish()
                 }
             }
         }
