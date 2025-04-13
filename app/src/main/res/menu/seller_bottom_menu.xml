@@ -8,10 +8,10 @@
     <item
         android:id="@+id/add"
         android:icon="@drawable/ic_add"
-        android:title="@string/add" />
+        android:title="Upload Product" />
 
     <item
         android:id="@+id/profile"
         android:icon="@drawable/ic_profile"
-        android:title="@string/profile" />
+        android:title="Profile" />
 </menu>

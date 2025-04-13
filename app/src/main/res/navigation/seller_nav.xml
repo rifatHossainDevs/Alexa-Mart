@@ -8,16 +8,16 @@
     <fragment
         android:id="@+id/product"
         android:name="com.epsports.alexamart.dashboard.seller.products.MyProductFragment"
-        android:label="fragment_my_product"
+        android:label="Product"
         tools:layout="@layout/fragment_my_product" />
     <fragment
         android:id="@+id/add"
         android:name="com.epsports.alexamart.dashboard.seller.upload.UploadProductFragment"
-        android:label="fragment_upload_product"
+        android:label="Upload Product"
         tools:layout="@layout/fragment_upload_product" />
     <fragment
         android:id="@+id/profile"
         android:name="com.epsports.alexamart.dashboard.seller.profile.SellerProfileFragment"
-        android:label="fragment_seller_profile"
+        android:label="Seller Profile"
         tools:layout="@layout/fragment_seller_profile" />
 </navigation>
