@@ -1,20 +1,47 @@
 package com.epsports.alexamart.dashboard.seller.upload
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import com.epsports.alexamart.R
+import com.epsports.alexamart.base.BaseFragment
+import com.epsports.alexamart.core.extract
+import com.epsports.alexamart.data.Product
+import com.epsports.alexamart.databinding.FragmentUploadProductBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class UploadProductFragment : Fragment() {
+@AndroidEntryPoint
+class UploadProductFragment :
+    BaseFragment<FragmentUploadProductBinding>(FragmentUploadProductBinding::inflate) {
+    override fun setAllClickListener() {
+        binding.apply {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_upload_product, container, false)
+            ivProduct.setOnClickListener {
+
+            }
+
+            btnUploadProduct.setOnClickListener {
+                val name = etProductName.extract()
+                val price = etProductPrice.extract()
+                val description = etProductDescription.extract()
+                val amount = etProductAmount.extract()
+
+                val product = Product(
+                    name = name,
+                    price = price.toDouble(),
+                    description = description,
+                    amount = amount.toInt()
+                )
+
+                uploadProduct(product)
+            }
+
+        }
     }
+
+    private fun uploadProduct(product: Product) {
+
+    }
+
+    override fun allObserver() {
+
+    }
+
 
 }
