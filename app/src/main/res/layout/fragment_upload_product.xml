@@ -89,8 +89,9 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_16sdp"
             android:layout_marginTop="@dimen/_32sdp"
-            android:fontFamily="@font/poppins_thin"
+            android:fontFamily="@font/poppins_regular"
             android:text="@string/upload_product"
+            android:textColor="#FFFFFF"
             android:textStyle="bold" />
 
     </LinearLayout>
