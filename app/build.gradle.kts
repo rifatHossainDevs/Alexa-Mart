@@ -70,6 +70,8 @@ dependencies {
     implementation(libs.lottie)
     implementation(libs.dagger.hilt.android)
     kapt(libs.dagger.hilt.compiler)
-
+    implementation (libs.imagepicker)
+    implementation (libs.androidx.activity.ktx)
+    implementation (libs.androidx.fragment.ktx)
 
 }
