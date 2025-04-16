@@ -2,10 +2,12 @@ package com.epsports.alexamart.dashboard.seller.upload
 
 import android.Manifest
 import android.app.Activity
+import android.os.Build
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import com.epsports.alexamart.base.BaseFragment
 import com.epsports.alexamart.core.areAllPermissionGranted
@@ -20,6 +22,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class UploadProductFragment :
     BaseFragment<FragmentUploadProductBinding>(FragmentUploadProductBinding::inflate) {
     private val viewmodel: UploadProductViewmodel by viewModels()
+    private lateinit var permissionRequest: ActivityResultLauncher<Array<String>>
+
 
     override fun setAllClickListener() {
 
@@ -61,6 +65,7 @@ class UploadProductFragment :
         }
     }
 
+
     private fun getPermissionRequest(): ActivityResultLauncher<Array<String>> {
         return registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
             if (areAllPermissionGranted(permissionList)) {
@@ -90,13 +95,14 @@ class UploadProductFragment :
     }
 
     companion object {
+
         private val permissionList = arrayOf(
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.CAMERA
         )
     }
 
-    private lateinit var permissionRequest: ActivityResultLauncher<Array<String>>
+
 
     private val startForProfileImageResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
