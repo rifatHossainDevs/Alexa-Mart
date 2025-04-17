@@ -2,12 +2,10 @@ package com.epsports.alexamart.dashboard.seller.upload
 
 import android.Manifest
 import android.app.Activity
-import android.os.Build
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import com.epsports.alexamart.base.BaseFragment
 import com.epsports.alexamart.core.areAllPermissionGranted
@@ -16,7 +14,9 @@ import com.epsports.alexamart.core.requestPermission
 import com.epsports.alexamart.data.Product
 import com.epsports.alexamart.databinding.FragmentUploadProductBinding
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class UploadProductFragment :
@@ -101,7 +101,6 @@ class UploadProductFragment :
             Manifest.permission.CAMERA
         )
     }
-
 
 
     private val startForProfileImageResult =
