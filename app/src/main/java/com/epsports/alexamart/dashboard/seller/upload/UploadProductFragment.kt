@@ -8,6 +8,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import com.epsports.alexamart.base.BaseFragment
+import com.epsports.alexamart.core.DataState
 import com.epsports.alexamart.core.areAllPermissionGranted
 import com.epsports.alexamart.core.extract
 import com.epsports.alexamart.core.requestPermission
@@ -16,16 +17,20 @@ import com.epsports.alexamart.databinding.FragmentUploadProductBinding
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import java.util.UUID
+
 
 @AndroidEntryPoint
 class UploadProductFragment :
     BaseFragment<FragmentUploadProductBinding>(FragmentUploadProductBinding::inflate) {
     private val viewmodel: UploadProductViewmodel by viewModels()
     private lateinit var permissionRequest: ActivityResultLauncher<Array<String>>
-
+    private val product: Product by lazy {
+        Product()
+    }
 
     override fun setAllClickListener() {
+
 
         permissionRequest = getPermissionRequest()
 
@@ -42,12 +47,18 @@ class UploadProductFragment :
                 val description = etProductDescription.extract()
                 val amount = etProductAmount.extract()
 
-                val product = Product(
-                    name = name,
-                    price = price.toDouble(),
-                    description = description,
-                    amount = amount.toInt()
-                )
+                FirebaseAuth.getInstance().currentUser?.let {
+                    product.apply {
+                        this.productId = UUID.randomUUID().toString()
+                        this.sellerId = it.uid
+                        this.name = name
+                        this.price = price.toDouble()
+                        this.description = description
+                        this.amount = amount.toInt()
+                    }
+                }
+
+
 
                 uploadProduct(product)
             }
@@ -87,11 +98,27 @@ class UploadProductFragment :
     }
 
     private fun uploadProduct(product: Product) {
-
+        viewmodel.productUpload(product)
     }
 
     override fun allObserver() {
+        viewmodel.productUploadResponse.observe(viewLifecycleOwner) {
 
+            when (it) {
+                is DataState.Error -> {
+                    loading.dismiss()
+                }
+
+                is DataState.Loading -> {
+                    loading.show()
+                }
+
+                is DataState.Success -> {
+                    loading.dismiss()
+                    Toast.makeText(requireContext(), it.data, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
     companion object {
@@ -112,6 +139,7 @@ class UploadProductFragment :
                 //Image Uri will not be null for RESULT_OK
                 val fileUri = data?.data!!
                 viewmodel.setImageUri(fileUri)
+                product.imageLink = fileUri.toString()
 
             } else if (resultCode == ImagePicker.RESULT_ERROR) {
                 Toast.makeText(requireContext(), ImagePicker.getError(data), Toast.LENGTH_SHORT)
