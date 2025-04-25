@@ -22,8 +22,6 @@ class UploadProductViewmodel @Inject constructor(private val repo: SellerReposit
         repo.uploadProductImage(imageUri).addOnSuccessListener { snapshot ->
             snapshot.metadata?.reference?.downloadUrl?.addOnSuccessListener { url ->
 
-
-
                 product.imageLink = url.toString()
                 repo.uploadProduct(product).addOnSuccessListener {
                     _productUploadResponse.postValue(DataState.Success("Uploaded and update product successfully"))
