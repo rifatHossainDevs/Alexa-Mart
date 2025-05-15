@@ -83,4 +83,5 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         }
         return true
     }
+
 }
