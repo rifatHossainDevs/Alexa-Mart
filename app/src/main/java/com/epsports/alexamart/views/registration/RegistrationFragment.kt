@@ -33,7 +33,6 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(FragmentR
                         ""
                     )
                     viewModel.userRegistration(user)
-
                 }
             }
 
