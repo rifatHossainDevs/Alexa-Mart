@@ -105,5 +105,4 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(FragmentR
         }
         return true
     }
-
 }
