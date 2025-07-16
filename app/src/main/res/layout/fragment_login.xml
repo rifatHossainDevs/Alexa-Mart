@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".views.login.LoginFragment"
+    android:gravity="center"
     android:orientation="vertical"
-    android:gravity="center">
+    tools:context=".views.login.LoginFragment">
 
     <ImageView
         android:id="@+id/ivLogo"
         android:layout_width="@dimen/_150sdp"
         android:layout_height="@dimen/_150sdp"
-        android:src="@drawable/logo"/>
+        android:src="@drawable/logo" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -23,9 +23,10 @@
         android:text="@string/login_to_alexa_mart"
         android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
         android:textColor="#E64A4A"
-        android:textSize="@dimen/_28sdp"/>
+        android:textSize="@dimen/_28sdp" />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/emailInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_32sdp"
@@ -36,8 +37,7 @@
         app:helperTextEnabled="true"
         app:helperTextTextColor="#FB0101"
         app:hintAnimationEnabled="true"
-        app:hintEnabled="true"
-        android:id="@+id/emailInputLayout">
+        app:hintEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_email"
@@ -50,6 +50,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_32sdp"
@@ -61,8 +62,7 @@
         app:helperTextEnabled="true"
         app:helperTextTextColor="#FB0101"
         app:hintAnimationEnabled="true"
-        app:hintEnabled="true"
-        android:id="@+id/passwordInputLayout">
+        app:hintEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_password"
@@ -78,9 +78,9 @@
         android:id="@+id/forgetPasswordTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/forget_password"
         android:layout_marginHorizontal="@dimen/_34sdp"
-        android:textColor="#079BE0"/>
+        android:text="@string/forget_password"
+        android:textColor="#079BE0" />
 
     <Button
         android:id="@+id/btnLogin"
@@ -88,15 +88,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_32sdp"
+        android:layout_marginTop="@dimen/_32sdp"
         android:layout_marginBottom="@dimen/_8sdp"
+        android:backgroundTint="#FF304F"
         android:text="@string/login"
         android:textColor="@color/black"
-        android:layout_marginTop="@dimen/_32sdp"
-        android:backgroundTint="#FF304F"
         android:textSize="@dimen/_16ssp"
         app:layout_constraintBottom_toTopOf="@id/btnRegister"
         app:strokeColor="#FA0505"
         app:strokeWidth="@dimen/_2sdp" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -104,6 +105,7 @@
         android:text="@string/don_t_have_an_account"
         android:textColor="#FF304F"
         android:textSize="@dimen/_12sdp" />
+
     <Button
         android:id="@+id/btnRegister"
         style="?attr/materialButtonOutlinedStyle"
