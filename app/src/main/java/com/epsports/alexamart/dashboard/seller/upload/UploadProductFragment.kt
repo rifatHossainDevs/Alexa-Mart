@@ -19,7 +19,6 @@ import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.UUID
 
-
 @AndroidEntryPoint
 class UploadProductFragment :
     BaseFragment<FragmentUploadProductBinding>(FragmentUploadProductBinding::inflate) {
@@ -34,7 +33,6 @@ class UploadProductFragment :
         permissionRequest = getPermissionRequest()
 
         binding.apply {
-
 
             ivProduct.setOnClickListener {
                 requestPermission(permissionRequest, permissionList)
@@ -56,9 +54,6 @@ class UploadProductFragment :
                         this.amount = amount.toInt()
                     }
                 }
-
-
-
                 uploadProduct(product)
             }
 
@@ -74,7 +69,6 @@ class UploadProductFragment :
             }
         }
     }
-
 
     private fun getPermissionRequest(): ActivityResultLauncher<Array<String>> {
         return registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
