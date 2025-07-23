@@ -31,7 +31,6 @@ class UploadProductFragment :
 
     override fun setAllClickListener() {
 
-
         permissionRequest = getPermissionRequest()
 
         binding.apply {
