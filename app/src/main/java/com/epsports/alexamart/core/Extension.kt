@@ -10,7 +10,7 @@ fun EditText.extract(): String {
     return text.toString().trim()
 }
 
-fun Fragment.requestPermission(
+fun requestPermission(
     request: ActivityResultLauncher<Array<String>>,
     permission: Array<String>,
 ) {
